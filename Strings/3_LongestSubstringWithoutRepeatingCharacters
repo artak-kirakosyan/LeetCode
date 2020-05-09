@@ -1,0 +1,20 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        substr = []
+        longest_len = 0
+        for ind, ch in enumerate(s):
+            if ch not in substr:
+                substr.append(ch)
+                curr_len = len(substr)
+            else:
+                curr_len = len(substr)
+                last_nd = curr_len - substr[::-1].index(ch) - 1
+                substr = substr[last_nd+1:] +[ch]
+            if curr_len > longest_len:
+                longest_len = curr_len
+        return longest_len
+
