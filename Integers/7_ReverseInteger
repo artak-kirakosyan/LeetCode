@@ -1,0 +1,26 @@
+class Solution(object):
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        
+        if x < 0:
+            x_str = str(abs(x))
+            x_str = x_str.lstrip('0')
+            x_rev = x_str[::-1]
+            x_new = int(x_rev)
+            x_new = -1 * x_new
+        else:
+            x_str = str(x)
+            x_str = x_str.lstrip('0')
+            x_rev = x_str[::-1]
+            try:
+                x_new = int(x_rev)
+            except ValueError:
+                x_new = 0
+            x_new = x_new
+        if x_new > 2**31-1 or x_new < -1*2**31:
+            return 0
+        return x_new
+

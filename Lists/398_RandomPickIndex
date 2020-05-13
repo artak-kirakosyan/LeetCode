@@ -1,0 +1,28 @@
+import random
+class Solution(object):
+
+    def __init__(self, nums):
+        """
+        :type nums: List[int]
+        """
+        self.indexes = {}
+        for i, j in enumerate(nums):
+            try:
+                self.indexes[j].append(i)
+            except KeyError:
+                self.indexes[j] = [i]
+        
+
+    def pick(self, target):
+        """
+        :type target: int
+        :rtype: int
+        """
+        # print(self.indexes[target])
+        return random.choice(self.indexes[target])
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(nums)
+# param_1 = obj.pick(target)
+
