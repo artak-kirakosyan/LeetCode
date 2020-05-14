@@ -1,0 +1,51 @@
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        n1 = len(nums1)
+        n2 = len(nums2)
+        arr1 = nums1
+        arr2 = nums2
+        arr3 = [None] * (n1 + n2) 
+        i = 0
+        j = 0
+        k = 0
+
+        # Traverse both array 
+        while i < n1 and j < n2:  
+            if arr1[i] < arr2[j]: 
+                arr3[k] = arr1[i] 
+                k = k + 1
+                i = i + 1
+            else: 
+                arr3[k] = arr2[j] 
+                k = k + 1
+                j = j + 1
+
+
+        # Store remaining elements 
+        # of first array 
+        while i < n1: 
+            arr3[k] = arr1[i]; 
+            k = k + 1
+            i = i + 1
+
+        # Store remaining elements  
+        # of second array 
+        while j < n2: 
+            arr3[k] = arr2[j]; 
+            k = k + 1
+            j = j + 1
+        print(arr3)
+        
+        if (n1 + n2)%2 == 0:
+            mid_index = (n1+n2)/2
+            print(mid_index)
+            print(arr3[mid_index - 1] + arr3[mid_index])
+            return (arr3[mid_index - 1] + arr3[mid_index])/2.
+        else:
+            return arr3[(n1+n2)//2]
+
