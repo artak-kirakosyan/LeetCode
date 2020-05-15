@@ -1,0 +1,49 @@
+# """
+# This is Master's API interface.
+# You should not implement it, or speculate about its implementation
+# """
+#class Master(object):
+#    def guess(self, word):
+#        """
+#        :type word: str
+#        :rtype int
+#        """
+import numpy as np
+import random
+class Solution(object):
+    def findSecretWord(self, wordlist, master):
+        """
+        :type wordlist: List[Str]
+        :type master: Master
+        :rtype: None
+        """
+        matrix = self.construct_matrix(wordlist)
+        
+        curr_guess = random.choice(wordlist)
+        result = master.guess(curr_guess)
+        print(curr_guess)
+        
+        while result != 6:
+            possible_words = []
+            diff = 6 - result
+            curr_diffs = matrix[wordlist.index(curr_guess)]
+            for i, j in enumerate(curr_diffs):
+                if j == diff:
+                    possible_words.append(wordlist[i])
+            wordlist = possible_words
+            matrix = self.construct_matrix(wordlist)
+            print(matrix)
+            curr_guess = random.choice(wordlist)
+            result = master.guess(curr_guess)
+        # print(curr_guess)
+        
+    def count_diff(self, word, word_2):
+        return sum([i != j for i, j in zip(word, word_2)])
+    
+    def construct_matrix(self, wordlist):
+        matrix = np.zeros((len(wordlist), len(wordlist)))
+        for word_ind, word in enumerate(wordlist):
+            for word_ind_2, word_2 in enumerate(wordlist):
+                matrix[word_ind][word_ind_2] = self.count_diff(word, word_2)
+        return matrix
+
