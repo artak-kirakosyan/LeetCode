@@ -1,0 +1,24 @@
+class Solution(object):
+    def selfDividingNumbers(self, left, right):
+        """
+        :type left: int
+        :type right: int
+        :rtype: List[int]
+        """
+        res = []
+        for i in range(left, right+1):
+            if self.check_self_dividing(i):
+                res.append(i)
+        return res
+    
+    def check_self_dividing(self, numb):
+        tmp = numb
+        while numb > 0:
+            div = numb % 10
+            if div != 0 and tmp % div != 0:
+                return False
+            elif div == 0:
+                return False
+            numb //= 10
+        return True
+
