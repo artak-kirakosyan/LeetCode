@@ -1,0 +1,18 @@
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        count = 0
+        for letters in zip(*strs):
+            print(letters)
+            if sum([i == letters[0] for i in letters]) == len(letters):
+                print(letters)
+                count += 1
+            else:
+                break
+        if count:
+            return strs[0][:count]
+        return ""
+
