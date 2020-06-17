@@ -1,0 +1,14 @@
+class Solution(object):
+    def distanceBetweenBusStops(self, distance, start, destination):
+        """
+        :type distance: List[int]
+        :type start: int
+        :type destination: int
+        :rtype: int
+        """
+        start, dest = min(start, destination), max(start, destination)
+        first = sum(distance[start:dest])
+        second = sum(distance) - first
+
+        return min(first, second)
+
