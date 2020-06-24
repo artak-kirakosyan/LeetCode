@@ -1,0 +1,41 @@
+class Solution(object):
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        return str(int(num1)*int(num2))
+
+
+class Solution(object):
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        num1 = self.convert_to_int(num1)
+        num2 = self.convert_to_int(num2)
+        res = num1 * num2
+        print(res)
+        return self.convert_to_str(res)
+        
+    def convert_to_int(self, num):
+        result = 0
+        for ch in num:
+            result *= 10
+            result += string.digits.index(ch)
+        return result
+    
+    def convert_to_str(self, num):
+        result = []
+        while num > 0:
+            digit = num%10
+            num //= 10
+            
+            result.append(string.digits[digit])
+        if not result:
+            result = [string.digits[0]]
+        return "".join(result[::-1])
+
