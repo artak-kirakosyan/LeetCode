@@ -1,0 +1,13 @@
+class Solution(object):
+    def isNumber(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        s = s.strip(" ")
+        try:
+            fl = float(s)
+        except:
+            return False
+        return True
+
