@@ -1,0 +1,30 @@
+class Solution(object):
+    def checkPossibility(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        found = False
+        prev = None
+        num_len = len(nums)
+        for i in range(num_len - 1):
+            if nums[i] > nums[i + 1]:
+                if found:
+                    return False
+                if prev is None:
+                    found = True
+                else:
+                    if prev > nums[i + 1]:
+                        if i + 2 < num_len:
+                            if nums[i] > nums[i+2]:
+                                return False
+                            else:
+                                found = True
+                        else:
+                            found = True
+                    else:
+                        found = True
+            prev = nums[i]
+            
+        return True
+
