@@ -1,0 +1,17 @@
+class Solution(object):
+    def plusOne(self, digits):
+        """
+        :type digits: List[int]
+        :rtype: List[int]
+        """
+        curr = len(digits) - 1
+        digits[curr] += 1
+        while digits[curr] > 9:
+            digits[curr] = 0
+            if curr == 0:
+                digits.insert(curr, 1)
+                break
+            curr -= 1
+            digits[curr] += 1
+        return digits
+
