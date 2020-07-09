@@ -1,0 +1,20 @@
+class Solution(object):
+    def groupThePeople(self, groupSizes):
+        """
+        :type groupSizes: List[int]
+        :rtype: List[List[int]]
+        """
+        idx = {}
+        for i in range(len(groupSizes)):
+            try:
+                idx[groupSizes[i]].append(i)
+            except KeyError:
+                idx[groupSizes[i]] = [i]
+        results = []
+        for i, j in idx.items():
+            curr = 0
+            while curr + i <= len(j):
+                results.append(j[curr:curr+i])
+                curr += i
+        return results
+
