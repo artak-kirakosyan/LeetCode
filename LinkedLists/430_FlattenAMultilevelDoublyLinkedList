@@ -1,0 +1,31 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, prev, next, child):
+        self.val = val
+        self.prev = prev
+        self.next = next
+        self.child = child
+"""
+
+class Solution:
+    def flatten(self, head: 'Node') -> 'Node':
+        self.res = None
+        self.curr = None
+        self.iterate(head, None)
+        return self.res
+    
+    def iterate(self, head, prev):
+        if head is None:
+            return
+        if self.res is None:
+            self.res = Node(head.val, None, None, None)
+            self.curr = self.res
+        else:
+            self.curr.next = Node(head.val, self.curr, None, None)
+            self.curr = self.curr.next
+        if head.child is not None:
+            self.iterate(head.child, head)
+        if head.next is not None:
+            self.iterate(head.next, head)
+
