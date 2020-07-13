@@ -1,0 +1,60 @@
+# NOT OPTIMAL AS WE TRAVERSE THE WHOLE TREE EVEN IF ALREADY DETECTED UNEQUALITY
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        
+        self.iterate(p, q)
+        if hasattr(self, 'flag'):
+            return False
+        return True
+    
+    def iterate(self, root1, root2):
+        if root1 is None and root2 is None:
+            return True
+        if root1 is None or root2 is None:
+            self.flag = 1
+            return False
+        if root1.val != root2.val:
+            self.flag = 1
+            return False
+            
+        self.iterate(root1.left, root2.left)
+        self.iterate(root1.right, root2.right)
+
+# TURNS OUT THIS SOLUTION IS SLOWER
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        current1, current2 = p, q
+        stack = []
+        done = 0
+        while True:
+            # Check if only 1 of the current notes is None, then return False
+            s = 0
+            if current1 is None:
+                s += 1
+            if current2 is None:
+                s += 1
+            if s == 1:
+                return False
+            if current1 is not None and current2 is not None:
+                if current1.val != current2.val:
+                    return False
+                stack.append((current1, current2))
+                current1, current2 = current1.left, current2.left
+            elif(stack):
+                current1, current2 = stack.pop()
+                current1, current2 = current1.right, current2.right
+            else: 
+                return True
+            
