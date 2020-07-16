@@ -1,0 +1,24 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+        self.target = target
+        self.iterate(original, cloned)
+        return self.clone_target
+
+    def iterate(self, orig, clone):
+        if orig is None and clone is None:
+            return True
+        if orig is self.target:
+            self.clone_target = clone
+            return
+        if not hasattr(self, "clone_target"):
+            self.iterate(orig.left, clone.left)
+        if not hasattr(self, "clone_target"):
+            self.iterate(orig.right, clone.right)
+
