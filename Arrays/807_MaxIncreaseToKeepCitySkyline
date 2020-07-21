@@ -1,0 +1,13 @@
+class Solution:
+    def maxIncreaseKeepingSkyline(self, grid: List[List[int]]) -> int:
+
+        horizontal_maxs = [max(i) for i in grid]
+        vertical_maxs = [max([grid[i][j] for i in range(len(grid[0]))]) 
+                        for j in range(len(grid))]
+        count = 0
+        
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                count += min(vertical_maxs[j], horizontal_maxs[i]) - grid[i][j]
+        return count
+
