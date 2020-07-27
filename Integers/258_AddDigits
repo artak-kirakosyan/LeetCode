@@ -1,0 +1,22 @@
+class Solution:
+    def addDigits(self, num: int) -> int:
+        if num == 0:
+            return num
+        else:
+            return (num-1) % 9 + 1
+
+
+class Solution:
+    def addDigits(self, num: int) -> int:
+        res = self.digit_sum(num)
+        while res > 9:
+            res = self.digit_sum(res)
+        return res
+
+    def digit_sum(self, x):
+        total = 0
+        while x > 0:
+            total = total + (x % 10)
+            x = x // 10
+        return total
+
