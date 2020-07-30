@@ -16,7 +16,7 @@ class Solution(object):
     
     def iterate(self, root, level):
         if root is None:
-            return 
+            return
         try:
             self.results[level].append(root.val)
         except IndexError:
