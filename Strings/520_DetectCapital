@@ -1,0 +1,12 @@
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        first_upper = str.isupper(word[0])
+        upper_count = 0
+        for i in word[1:]:
+            if str.isupper(i):
+               upper_count += 1
+        if first_upper:
+            return upper_count == (len(word) - 1) or upper_count == 0
+        else:
+            return upper_count == 0
+
