@@ -1,0 +1,5 @@
+class Solution:
+    def isPowerOfFour(self, num: int) -> bool:
+        if num < 0:
+            return False
+        return bin(num).count("1") == 1 and len(bin(num)) % 2 == 1
