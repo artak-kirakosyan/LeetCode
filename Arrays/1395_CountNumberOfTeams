@@ -1,0 +1,10 @@
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        count = 0
+        for ind1, rat1 in enumerate(rating[:-2]):
+            for ind2, rat2 in enumerate(rating[ind1 + 1:-1], ind1 + 1):
+                for ind3, rat3 in enumerate(rating[ind2 + 1:], ind2 + 1):
+                    if rat3 > rat2 > rat1 or rat3 < rat2 < rat1:
+                        count += 1
+        return count
+
