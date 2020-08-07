@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
+        self.results = {}
+        self.iterate(root, 0, 0)
+        # sort by position
+        results = sorted(self.results.items(), key=lambda x: x[0])
+        # remove position information
+        results = [i[1] for i in results]
+        # sort by level, if level is equal, by value
+        results = [sorted(i) for i in results]
+        # remove level information and form the necessary output
+        results = [[j[1] for j in i] for i in results]
+        return results
+        
+        
+    def iterate(self, root, level, position):
+        if root is None:
+            return
+        # keep track of the position and level
+        if position in self.results:
+            self.results[position].append([level, root.val])
+        else:
+            self.results[position] = [[level, root.val],]
+        
+        self.iterate(root.left, level + 1, position - 1)
+        self.iterate(root.right, level + 1, position + 1)
+
