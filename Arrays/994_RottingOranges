@@ -1,0 +1,42 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        num_days = 0
+        
+        self.grid = grid
+        self.height = len(grid)
+        self.width = len(grid[0])
+        change_detected = True
+        
+        while change_detected:
+            change_detected = self.do_one_iteration()
+            if change_detected:
+                num_days += 1
+                
+        return num_days if self.check_all_rotten() else -1
+    
+    def check_all_rotten(self):
+        for r_ind in range(self.height):
+            for c_ind in range(self.width):
+                if self.grid[r_ind][c_ind] == 1:
+                    return False
+        return True
+    def do_one_iteration(self):
+        change_detected = False
+        prev_state = [i.copy() for i in self.grid]
+        
+        for r_ind in range(self.height):
+            for c_ind in range(self.width):
+                if prev_state[r_ind][c_ind] == 1:
+                    r_up  = max(r_ind - 1, 0)
+                    r_down = min(r_ind + 1, self.height - 1)
+                    c_up = max(c_ind - 1, 0)
+                    c_down = min(c_ind + 1, self.width - 1)
+                    
+                    if prev_state[r_up][c_ind] == 2 or\
+                        prev_state[r_down][c_ind] == 2 or\
+                        prev_state[r_ind][c_up] == 2 or\
+                        prev_state[r_ind][c_down] == 2:
+                        self.grid[r_ind][c_ind] = 2
+                        change_detected = True
+        return change_detected
+
