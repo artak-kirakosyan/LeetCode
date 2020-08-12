@@ -1,0 +1,21 @@
+class Solution:
+    
+    def __init__(self):
+        self.hash_map = {0: 1}
+        
+    def getRow(self, rowIndex: int):
+        self.factorial(rowIndex)
+        arr = [0] * (rowIndex + 1)
+        for i in  range(rowIndex + 1):
+            arr[i] = int(self.hash_map[rowIndex]/(self.hash_map[i] * self.hash_map[rowIndex - i]))
+        return arr
+    
+    def factorial(self, k):
+        if k in self.hash_map:
+            return self.hash_map[k]
+        if k == 0:
+            return 1
+        f = k * self.factorial(k - 1)
+        self.hash_map[k] = f
+        return f
+
