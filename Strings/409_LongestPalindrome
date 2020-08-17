@@ -1,0 +1,59 @@
+from collections import Counter
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        count = 0
+        c = Counter(s)
+        for i in c.values():
+            count += i - i % 2
+        for i in c.values():
+            if i % 2 == 1:
+                count += 1
+                break
+        return count
+
+
+# Slower
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        count = 0
+        queue = {}
+        for ch in s:
+            if ch in queue:
+                del queue[ch]
+                count += 2
+            else:
+                queue[ch] = 1
+        if queue:
+            count += 1
+        return count
+
+
+# Better than the second one
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        count = 0
+        queue = {}
+        for ch in s:
+            if ch in queue:
+                queue.pop(ch)
+                count += 2
+            else:
+                queue[ch] = 1
+        if queue:
+            count += 1
+        return count
+
+# Same as second
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        count = 0
+        queue = {}
+        for ch in s:
+            try:
+                queue.pop(ch)
+                count += 2
+            except KeyError:
+                queue[ch] = 1
+        if queue:
+            count += 1
+        return count

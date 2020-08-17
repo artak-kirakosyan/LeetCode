@@ -1,0 +1,26 @@
+class Solution:
+    def distributeCandies(self, candies: int, num_people: int) -> List[int]:
+        total = int((1 + num_people) * num_people / 2)
+        total_runs = 0
+        while candies > total:
+            total_runs += 1
+            candies -= total
+            total += num_people * num_people
+        if total_runs > 0:
+            print(f"Total:{total}, total_runs: {total_runs}, remaining: {candies}")
+            people = [i * total_runs + num_people * int((total_runs - 1) * total_runs/2) for i in range(1, num_people + 1)]
+        else:
+            people = [0] * num_people
+        curr_candie = 1 + total_runs * num_people
+        ind = 0
+        while candies > 0:
+            if curr_candie > candies:
+                people[ind] += candies
+                candies = 0
+            else:
+                people[ind] += curr_candie
+                candies -= curr_candie
+                curr_candie += 1
+                ind += 1
+        return people
+
